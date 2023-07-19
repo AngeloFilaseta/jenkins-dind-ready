@@ -20,9 +20,7 @@ services:
     profiles: ["service"]
 
   jenkins-blueocean:
-    build: 
-      context: .
-      dockerfile: Dockerfile.service
+    build: .
     container_name: jenkins-blueocean
     restart: on-failure
     networks:
