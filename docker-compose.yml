@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   jenkins-docker:
     image: docker:dind
     container_name: jenkins-docker
@@ -16,9 +17,12 @@ services:
     ports:
       - 2376:2376
     command: --storage-driver overlay2
+    profiles: ["service"]
 
   jenkins-blueocean:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.service
     container_name: jenkins-blueocean
     restart: on-failure
     networks:
@@ -33,10 +37,24 @@ services:
     volumes:
       - jenkins-data:/var/jenkins_home
       - jenkins-docker-certs:/certs/client:ro
+    profiles: ["service"]
 
+  agent:
+    build: 
+      context: .
+      dockerfile: Dockerfile.agent
+    privileged: true
+    container_name: jenkins-agent
+    volumes:
+      - /home/angelo/agent_test:/home/angelo/agent_test
+    networks:
+      - jenkins
+    profiles: ["agent"]
+      
 networks:
   jenkins:
 
 volumes:
+  agent-volume:
   jenkins-docker-certs:
   jenkins-data:
