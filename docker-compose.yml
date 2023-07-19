@@ -39,16 +39,17 @@ services:
       - jenkins-docker-certs:/certs/client:ro
     profiles: ["service"]
 
-  agent:
-    build: 
-      context: .
-      dockerfile: Dockerfile.agent
-    privileged: true
+  jenkins-agent:
+    image: jenkins/inbound-agent:latest-jdk17
     container_name: jenkins-agent
-    volumes:
-      - /home/angelo/agent_test:/home/angelo/agent_test
+    environment:
+      - JENKINS_URL=${JENKINS_URL}
+      - JENKINS_SECRET=${JENKINS_SECRET}
+      - JENKINS_AGENT_NAME=${JENKINS_AGENT_NAME}
     networks:
       - jenkins
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     profiles: ["agent"]
       
 networks:

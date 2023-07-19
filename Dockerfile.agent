@@ -1,3 +1,0 @@
-FROM jenkins/agent:latest-jdk17-preview
-
-ENTRYPOINT ["java","-jar","/usr/share/jenkins/agent.jar","-jnlpUrl", "http://jenkins-blueocean:8080/computer/agent/jenkins-agent.jnlp","-secret", "9e9814f1102995d533d4ba056e72405055f917812a11a4e1ba6f5925913e03f8", "-workDir", "/home/angelo/agent_test"]
