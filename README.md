@@ -20,7 +20,7 @@ docker compose up --profile service
 
 ## Configuring an Agent
 
-1. To configure an Agent on Jenkinsm, navigate to `Manage Jenkins` > `Manage Nodes and Clouds` > `New Node`. In the
+1. To configure an Agent on Jenkins, navigate to `Manage Jenkins` > `Manage Nodes and Clouds` > `New Node`. In the
    creation step don't use SSH.
 
 2. After setting up the agent, it won't be connected. Click on the name of the new agent marked with an X and look for
